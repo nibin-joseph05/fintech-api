@@ -5,6 +5,7 @@ import com.nibin.fintech.modules.user.entity.User;
 import com.nibin.fintech.modules.user.entity.enums.Status;
 import com.nibin.fintech.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,8 @@ import java.util.Random;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     public void registerUser(RegisterRequest request) {
 
@@ -36,7 +39,7 @@ public class UserService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .mobile(request.getMobile())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .status(Status.PENDING)
                 .createdAt(LocalDateTime.now())
                 .build();
