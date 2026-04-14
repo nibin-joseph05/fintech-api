@@ -1,5 +1,7 @@
 package com.nibin.fintech.modules.user.service;
 
+import com.nibin.fintech.modules.account.entity.Account;
+import com.nibin.fintech.modules.account.repository.AccountRepository;
 import com.nibin.fintech.modules.otp.entity.Otp;
 import com.nibin.fintech.modules.otp.repository.OtpRepository;
 import com.nibin.fintech.modules.user.dto.request.RegisterRequest;
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -22,6 +25,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final OtpRepository otpRepository;
+
+    private final AccountRepository accountRepository;
 
     public void registerUser(RegisterRequest request) {
 
@@ -97,5 +102,12 @@ public class UserService {
         // 7. Activate user
         user.setStatus(Status.ACTIVE);
         userRepository.save(user);
+
+        Account account = Account.builder()
+                .user(user)
+                .balance(BigDecimal.valueOf(1000))
+                .build();
+
+        accountRepository.save(account);
     }
 }
