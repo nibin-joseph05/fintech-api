@@ -1,5 +1,6 @@
 package com.nibin.fintech.modules.account.service;
 
+import com.nibin.fintech.core.exception.ApiException;
 import com.nibin.fintech.modules.account.dto.request.TransferRequest;
 import com.nibin.fintech.modules.account.entity.Account;
 import com.nibin.fintech.modules.account.repository.AccountRepository;
@@ -21,16 +22,16 @@ public class AccountService {
     public void transfer(TransferRequest request) {
 
         User sender = userRepository.findByEmail(request.getSenderEmail())
-                .orElseThrow(() -> new RuntimeException("Sender not found"));
+                .orElseThrow(() -> new ApiException("Sender not found"));
 
         User receiver = userRepository.findByEmail(request.getReceiverEmail())
-                .orElseThrow(() -> new RuntimeException("Receiver not found"));
+                .orElseThrow(() -> new ApiException("Receiver not found"));
 
         Account senderAccount = accountRepository.findByUser(sender)
-                .orElseThrow(() -> new RuntimeException("Sender account not found"));
+                .orElseThrow(() -> new ApiException("Sender account not found"));
 
         Account receiverAccount = accountRepository.findByUser(receiver)
-                .orElseThrow(() -> new RuntimeException("Receiver account not found"));
+                .orElseThrow(() -> new ApiException("Receiver account not found"));
 
         if (senderAccount.getBalance().compareTo(request.getAmount()) < 0) {
             throw new RuntimeException("Insufficient balance");

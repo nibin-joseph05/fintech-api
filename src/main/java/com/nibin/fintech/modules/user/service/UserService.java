@@ -1,5 +1,6 @@
 package com.nibin.fintech.modules.user.service;
 
+import com.nibin.fintech.core.exception.ApiException;
 import com.nibin.fintech.modules.account.entity.Account;
 import com.nibin.fintech.modules.account.repository.AccountRepository;
 import com.nibin.fintech.modules.otp.entity.Otp;
@@ -32,11 +33,11 @@ public class UserService {
 
         // 1. Check duplicates
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new ApiException("Email already exists");
         }
 
         if (userRepository.existsByMobile(request.getMobile())) {
-            throw new RuntimeException("Mobile already exists");
+            throw new ApiException("Mobile already exists");
         }
 
         // 2. Create user
@@ -74,25 +75,25 @@ public class UserService {
 
         // 1. Find user
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ApiException("User not found"));
 
         // 2. Get OTP
         Otp otp = otpRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("OTP not found"));
+                .orElseThrow(() -> new ApiException("OTP not found"));
 
         // 3. Check already verified
         if (otp.isVerified()) {
-            throw new RuntimeException("OTP already used");
+            throw new ApiException("OTP already used");
         }
 
         // 4. Check expiry
         if (otp.getExpiryTime().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("OTP expired");
+            throw new ApiException("OTP expired");
         }
 
         // 5. Validate OTP
         if (!otp.getOtp().equals(otpCode)) {
-            throw new RuntimeException("Invalid OTP");
+            throw new ApiException("Invalid OTP");
         }
 
         // 6. Mark OTP as verified
