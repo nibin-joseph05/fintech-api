@@ -1,4 +1,4 @@
-package com.nibin.fintech.modules.account;
+package com.nibin.fintech.modules.account.controller;
 
 import com.nibin.fintech.modules.account.dto.response.TransferResponse;
 import com.nibin.fintech.modules.account.dto.request.TransferRequest;
