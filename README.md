@@ -1,6 +1,6 @@
-# 🚀 Fintech API – Backend Assignment
+#  Fintech API – Backend Assignment
 
-## 📌 Overview
+##  Overview
 
 This project is a **Spring Boot-based backend system** that simulates a fintech-style user onboarding and transaction flow.
 
@@ -14,7 +14,7 @@ It includes:
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 * Java 17+
 * Spring Boot
@@ -25,7 +25,7 @@ It includes:
 
 ---
 
-## 🏗 Project Architecture
+##  Project Architecture
 
 The project follows a **layered architecture**:
 
@@ -45,7 +45,7 @@ Controller → Service → Repository
 
 ---
 
-## 🔐 Features Implemented
+##  Features Implemented
 
 ### 1. User Registration with OTP
 
@@ -80,9 +80,9 @@ Controller → Service → Repository
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
-### 🔑 Auth APIs
+###  Auth APIs
 
 #### Register
 
@@ -104,7 +104,7 @@ POST /api/auth/login
 
 ---
 
-### 💸 Transaction APIs
+###  Transaction APIs
 
 #### Transfer Money
 
@@ -120,16 +120,23 @@ GET /api/transactions/{email}
 
 ---
 
-## 🧪 Sample Requests
+##  Sample Requests
 
 ### Register
 
 ```json
+// {
+//   "name": "Sender",
+//   "email": "sender@gmail.com",
+//   "mobile": "9778234872",
+//   "password": "sender123"
+// }
+
 {
-  "name": "Nibin Joseph",
-  "email": "nibinjoseph@gmail.com",
-  "mobile": "9778234876",
-  "password": "nibin123"
+  "name": "receiver",
+  "email": "receiver@gmail.com",
+  "mobile": "9778234875",
+  "password": "receiver123"
 }
 ```
 
@@ -138,9 +145,14 @@ GET /api/transactions/{email}
 ### Verify OTP
 
 ```json
+// {
+//   "email": "sender@gmail.com",
+//   "otp": "159018" // otp varies
+// }
+
 {
-  "email": "nibinjoseph@gmail.com",
-  "otp": "123456"
+  "email": "receiver@gmail.com",
+  "otp": "134963" // otp varies
 }
 ```
 
@@ -150,9 +162,14 @@ GET /api/transactions/{email}
 
 ```json
 {
-  "email": "nibinjoseph@gmail.com",
-  "password": "nibin123"
+  "email": "sender@gmail.com",
+  "password": "sender123"
 }
+
+// {
+//   "email": "receiver@gmail.com",
+//   "password": "receiver123"
+// }
 ```
 
 ---
@@ -161,20 +178,29 @@ GET /api/transactions/{email}
 
 ```json
 {
-  "senderEmail": "nibinjoseph@gmail.com",
-  "receiverEmail": "testuser@gmail.com",
+  "senderEmail": "sender@gmail.com",
+  "receiverEmail": "receiver@gmail.com",
   "amount": 200
 }
+```
+### Get Transactions
+
+```json
+
+{{base_url}}/api/transactions/receiver@gmail.com
+
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+* Email is used instead of userId for simplicity and readability.
+
+## ️ Setup Instructions
 
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/fintech-api.git
+git clone https://github.com/nibin-joseph05/fintech-api.git
 cd fintech-api
 ```
 
@@ -204,7 +230,7 @@ Use Postman collection provided.
 
 ---
 
-## ⚠️ Notes
+## ️ Notes
 
 * OTP is printed in console (for testing purposes)
 * Security is partially open for testing APIs
@@ -216,7 +242,7 @@ Use Postman collection provided.
 
 ---
 
-## 📌 Key Concepts Demonstrated
+##  Key Concepts Demonstrated
 
 * Layered architecture
 * REST API design
@@ -228,15 +254,16 @@ Use Postman collection provided.
 
 ---
 
-## 📎 Submission Includes
+##  Submission Includes
 
 * GitHub Repository
 * Postman Collection
-* Demo Video
+* Demo Video 
+* Link : https://drive.google.com/file/d/1D2OWdew3DZHigUkSSCY5fR5EyYxy38b-/view?usp=drive_link
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Nibin Joseph**
 Java Backend Developer
