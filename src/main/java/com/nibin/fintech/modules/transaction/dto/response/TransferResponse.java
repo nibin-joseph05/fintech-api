@@ -1,4 +1,4 @@
-package com.nibin.fintech.modules.account.dto.response;
+package com.nibin.fintech.modules.transaction.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
