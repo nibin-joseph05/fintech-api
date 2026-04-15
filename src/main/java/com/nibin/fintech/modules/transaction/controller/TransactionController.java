@@ -23,7 +23,7 @@ public class TransactionController {
         return ResponseEntity.ok(new TransferResponse("Transfer successful"));
     }
 
-    @GetMapping("/transactions/{email}")
+    @GetMapping("/{email}")
     public ResponseEntity<List<Transaction>> getTransactions(@PathVariable String email) {
         return ResponseEntity.ok(transactionService.getTransactions(email));
     }
